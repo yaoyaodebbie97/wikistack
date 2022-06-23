@@ -6,6 +6,12 @@ const layout = require("./views/layout");
 const pg = require('pg');
 const { db, Page, User } = require('./models');
 
+const wikiRouter = require('./routes/wiki');
+const usersRouter = require ('./routes/users');
+
+app.use('/wiki',wikiRouter);
+app.use('/users',usersRouter);
+
 app.use(morgan('dev'));
 
 const staticMiddleware = express.static(path.join(__dirname ,'public'));
@@ -14,7 +20,8 @@ app.use(staticMiddleware);
 app.use(express.urlencoded({extended:false}));
 
 app.get("/",(req,res) =>{
-    res.send(layout(''));
+    // res.send(layout(''));
+    res.redirect('/wiki');
 })
 
 db.authenticate()

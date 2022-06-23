@@ -31,7 +31,10 @@ const User = db.define('user',
     },
     email:{
         type:Sequelize.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate :{
+            isEmail: true
+        }
     }
 })
 
